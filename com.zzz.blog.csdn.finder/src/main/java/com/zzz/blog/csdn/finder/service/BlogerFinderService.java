@@ -1,5 +1,6 @@
 package com.zzz.blog.csdn.finder.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Component;
 
@@ -14,5 +15,5 @@ public interface BlogerFinderService<T> {
      * @param blogerId
      * @return
      */
-    public List<T> getSubsciribeList(String blogerId);
+    public List<T> getSubsciribeList(String blogerId) throws JsonProcessingException;
 }

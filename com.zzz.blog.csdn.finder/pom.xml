@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.5</version>
+        <version>2.4.10</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zzz.blog.csdn</groupId>
@@ -52,6 +52,17 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.7.22</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.ibeetl/sql-springboot-starter -->
+        <dependency>
+            <groupId>com.ibeetl</groupId>
+            <artifactId>sql-springboot-starter</artifactId>
+            <version>3.13.1-RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>3.3.1</version>
         </dependency>
     </dependencies>
 

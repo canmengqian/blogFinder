@@ -1,0 +1,16 @@
+
+beetlsql:
+  sqlManagers: sqlManager1
+  sqlManager1:
+    ds: ds1
+    basePackage: com.zzz.blog.csdn.finder.dao
+    daoSuffix: Dao
+    dbStyle: org.beetl.sql.core.db.MySqlStyle
+    dev: true
+    sqlPath: sql
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: rootroot
+    url: jdbc:mysql://localhost:3306/MEDIA?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC

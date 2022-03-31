@@ -1,5 +1,6 @@
 package com.zzz.blog.csdn.finder.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.text.CharSequenceUtil;
@@ -10,9 +11,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zzz.blog.csdn.finder.dto.BlogerInfoDTO;
 import com.zzz.blog.csdn.finder.dto.Response;
+import com.zzz.blog.csdn.finder.entity.CsdnBlogerInfo;
+import com.zzz.blog.csdn.finder.mapper.CsdnBlogerInfoMapper;
 import com.zzz.blog.csdn.finder.service.BlogerFinderService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -20,6 +24,10 @@ import java.util.List;
 
 @Service("CsdnBlogerFinderServiceImpl")
 public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerInfoDTO> {
+
+    @Resource
+    CsdnBlogerInfoMapper csdnBlogerInfoMapper;
+
     private final static ObjectMapper jsonMapper = new ObjectMapper ();
     private static final int MAX_PAGE = 100;
 
@@ -28,7 +36,7 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
     @Override
     public List<BlogerInfoDTO> getSubsciribeList(String blogerId) throws JsonProcessingException {
         List<BlogerInfoDTO> all= new ArrayList<> ();
-        HttpResponse response = null;
+        HttpResponse response;
         String bodyJson = "";
         for (int i = 1; i <= MAX_PAGE; i++) {
             String url = "https://blog.csdn.net/community/home-api/v1/get-follow-list?page=%s&size=20&noMore=false&blogUsername=qq_17030015";
@@ -49,9 +57,13 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
                 break;
             } else {
                 all.addAll (responseBlog.getData ().getList ());
-                FileUtil.writeLines (responseBlog.getData ().getList (), new File (DEST_FILE), Charset.defaultCharset (), false);
             }
         }
+        List<CsdnBlogerInfo> entityes = new ArrayList<> ();
+        all.forEach (b->{
+            BeanUtil.copyProperties (b,CsdnBlogerInfo.class);
+        });
+        csdnBlogerInfoMapper.insertBatch (entityes);
 
         return all;
     }

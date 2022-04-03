@@ -3,8 +3,8 @@ beetlsql:
   sqlManagers: sqlManager1
   sqlManager1:
     ds: ds1
-    basePackage: com.zzz.blog.csdn.finder.dao
-    daoSuffix: Dao
+    basePackage: com.zzz.blog.csdn.finder.mapper
+    daoSuffix: Mapper
     dbStyle: org.beetl.sql.core.db.MySqlStyle
     dev: true
     sqlPath: sql

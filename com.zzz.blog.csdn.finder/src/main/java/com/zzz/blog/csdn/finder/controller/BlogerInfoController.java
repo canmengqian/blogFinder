@@ -6,6 +6,7 @@ import com.zzz.blog.csdn.finder.vo.blog.BlogerQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Indexed;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class BlogerInfoController {
     }
     @PostMapping("craw/subsribe/bloger")
     @ApiOperation (value = "抓取关注的博客主信息",notes = "抓取关注的博客主信息")
-    public void findSubsribeBloger(@RequestBody BlogerQuery query) throws JsonProcessingException {
+    public void findSubsribeBloger(@Validated  @RequestBody BlogerQuery query) throws JsonProcessingException {
         blogerManager.findSubsribeBloger (query);
     }
 }

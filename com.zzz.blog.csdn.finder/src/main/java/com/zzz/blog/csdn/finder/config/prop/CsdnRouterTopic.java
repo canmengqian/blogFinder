@@ -15,4 +15,5 @@ public class CsdnRouterTopic {
     String method ;
     String dataType ;
     String url;
+    String topicname;
 }

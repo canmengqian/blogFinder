@@ -11,6 +11,5 @@ class CsdnBlogerFinderServiceImplTest {
     @Test
     void getSubsciribeList() throws JsonProcessingException {
         CsdnBlogerFinderServiceImpl  service = new CsdnBlogerFinderServiceImpl ();
-        service.getSubsciribeList ("");
     }
 }

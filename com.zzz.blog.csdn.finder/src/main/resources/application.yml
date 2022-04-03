@@ -12,3 +12,10 @@ spring:
     remote:
       restart:
         enabled: true
+csdn:
+  blog:
+    selfid: qq_17030015
+    topic:
+      - method: GET
+        url: https://blog.csdn.net/community/home-api/v1/get-follow-list?page=%s&size=20&noMore=false&blogUsername=%s
+        topicname: subcribe

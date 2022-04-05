@@ -11,6 +11,7 @@ import com.zzz.blog.csdn.finder.vo.blog.BlogerQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
 import javax.annotation.Resource;
@@ -26,11 +27,11 @@ public class CsdnFinderScheduler {
     CsdnBlogerFinderServiceImpl csdnBlogerFinderService;
 
     @Scheduled(fixedDelay = 10000)
-    public void findInvoke() throws JsonProcessingException {
+    public void findInvoke() throws JsonProcessingException, InterruptedException {
         StopWatch stopWatch = new StopWatch ();
         stopWatch.start ("CSDN抓取任务开始");
         AtomicLong recordCount= new AtomicLong (0);
-        List<CsdnBlogerInfo> info = csdnBlogerFinderService.getMapper ().createLambdaQuery ().andEq (CsdnBlogerInfo::getExecSubcribeStatus, 0).limit (1, 100).select ();
+        List<CsdnBlogerInfo> info = csdnBlogerFinderService.getMapper ().createLambdaQuery ().andEq (CsdnBlogerInfo::getExecSubcribeStatus, 0).limit (1, 1000).select ();
         if (CollUtil.isNotEmpty (info)) {
             List<String> ids = info.stream ().map (CsdnBlogerInfo::getId).filter (CharSequenceUtil::isNotEmpty).collect (Collectors.toList ());
             ids.forEach (s -> {
@@ -38,7 +39,7 @@ public class CsdnFinderScheduler {
                 try {
                     List<BlogerInfoDTO> records=  csdnBlogerFinderService.getSubsciribeList (query);
                     recordCount.addAndGet (CollUtil.isEmpty (records)?0:records.size ());
-                   // Thread.sleep (5000);
+                    //Thread.sleep (20000);
                 } catch (JsonProcessingException e) {
                     e.printStackTrace ();
                 }
@@ -46,6 +47,8 @@ public class CsdnFinderScheduler {
 
         }
         stopWatch.stop ();
+        Thread.sleep (10000);
         log.info ("抓取耗时{}毫秒", stopWatch.getTotalTimeMillis ());
+
     }
 }

@@ -14,3 +14,6 @@ spring:
     username: root
     password: rootroot
     url: jdbc:mysql://192.168.0.6:3306/media?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+  redis:
+    host: 172.21.112.215
+    port: 6379

@@ -156,7 +156,7 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
             if (responseBlog == null) {
                 break;
             }
-            if (CollUtil.isEmpty (responseBlog.getData ().getList ())) {
+            if (responseBlog.getData () == null || CollUtil.isEmpty (responseBlog.getData ().getList ())) {
                 break;
             } else {
                 all.addAll (responseBlog.getData ().getList ());

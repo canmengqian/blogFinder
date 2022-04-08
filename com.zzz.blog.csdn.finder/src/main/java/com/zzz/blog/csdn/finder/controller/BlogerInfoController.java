@@ -24,7 +24,7 @@ public class BlogerInfoController {
     BlogerManager blogerManager;
     @PostMapping("query")
     @ApiOperation (value = "查询博客主信息",notes = "查询博客主信息")
-    public void queryBloger(){
+    public void queryBloger(@Validated  @RequestBody BlogerQuery query){
 
     }
     @PostMapping("craw/subsribe/bloger")

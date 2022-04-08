@@ -46,7 +46,7 @@ public class CodeGenner {
 
         simpleMavenProject.setBasePackage ("com.zzz.blog.csdn.finder");
         ConsoleOnlyProject consoleOnlyProject = new ConsoleOnlyProject ();
-        String tableName = "CSDN_BLOGER_INFO";
+        String tableName = "csdn_find_log";
         config.gen (tableName, simpleMavenProject);
     }
 

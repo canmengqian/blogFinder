@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      routes:
+        - id: test-service
+          uri: http://www.51cto.com
+          predicates:
+            - Path=/baidu
+

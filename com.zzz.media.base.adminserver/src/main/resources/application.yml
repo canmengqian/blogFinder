@@ -1,2 +1,7 @@
 server:
   port: 18081
+spring:
+  application:
+    name: admin
+  profiles:
+    active: dev

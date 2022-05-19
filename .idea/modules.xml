@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/com.zzz.media.base.adminserver/adminserver.iml" filepath="$PROJECT_DIR$/com.zzz.media.base.adminserver/adminserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/blogfinder.iml" filepath="$PROJECT_DIR$/.idea/blogfinder.iml" />
       <module fileurl="file://$PROJECT_DIR$/com.zzz.blog.csdn.finder/com.zzz.blog.csdn.finder.iml" filepath="$PROJECT_DIR$/com.zzz.blog.csdn.finder/com.zzz.blog.csdn.finder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.zzz.media.gateway/com.zzz.media.gateway.iml" filepath="$PROJECT_DIR$/com.zzz.media.gateway/com.zzz.media.gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.zzz.blog.csdn.finder/finder.iml" filepath="$PROJECT_DIR$/com.zzz.blog.csdn.finder/finder.iml" />
     </modules>
   </component>
 </project>

@@ -32,4 +32,10 @@ public class BlogerInfoController {
     public void findSubsribeBloger(@Validated  @RequestBody BlogerQuery query) throws JsonProcessingException {
         blogerManager.findSubsribeBloger (query);
     }
+
+    @PostMapping("index")
+    @ApiOperation (value = "查询博客主信息",notes = "查询博客主信息")
+    public String index(){
+        return "";
+    }
 }

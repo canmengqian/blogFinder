@@ -18,9 +18,9 @@ public class BlogerManager {
     BlogerFinderService<BlogerInfoDTO, CsdnBlogerInfoMapper> csdnBlogerFinderService;
 
     public void findSubsribeBloger(BlogerQuery query) throws JsonProcessingException {
-        switch (BlogerSourceType.getType (query.getSourceType ())) {
+        switch (BlogerSourceType.getType(query.getSourceType())) {
             case CSDN:
-                csdnBlogerFinderService.getSubsciribeList ( query);
+                csdnBlogerFinderService.getSubsciribeList(query);
                 break;
             case BLOGER:
                 break;

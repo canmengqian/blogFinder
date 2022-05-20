@@ -22,20 +22,22 @@ public class BlogerInfoController {
 
     @Resource
     BlogerManager blogerManager;
+
     @PostMapping("query")
-    @ApiOperation (value = "查询博客主信息",notes = "查询博客主信息")
-    public void queryBloger(@Validated  @RequestBody BlogerQuery query){
+    @ApiOperation(value = "查询博客主信息", notes = "查询博客主信息")
+    public void queryBloger(@Validated @RequestBody BlogerQuery query) {
 
     }
+
     @PostMapping("craw/subsribe/bloger")
-    @ApiOperation (value = "抓取关注的博客主信息",notes = "抓取关注的博客主信息")
-    public void findSubsribeBloger(@Validated  @RequestBody BlogerQuery query) throws JsonProcessingException {
-        blogerManager.findSubsribeBloger (query);
+    @ApiOperation(value = "抓取关注的博客主信息", notes = "抓取关注的博客主信息")
+    public void findSubsribeBloger(@Validated @RequestBody BlogerQuery query) throws JsonProcessingException {
+        blogerManager.findSubsribeBloger(query);
     }
 
     @PostMapping("index")
-    @ApiOperation (value = "查询博客主信息",notes = "查询博客主信息")
-    public String index(){
+    @ApiOperation(value = "查询博客主信息", notes = "查询博客主信息")
+    public String index() {
         return "";
     }
 }

@@ -34,7 +34,7 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
     @Resource
     CsdnBlogerInfoMapper csdnBlogerInfoMapper;
 
-    private final static ObjectMapper jsonMapper = new ObjectMapper ();
+    private final static ObjectMapper jsonMapper = new ObjectMapper();
     private static final int MAX_PAGE = 100;
 
     @Resource
@@ -47,10 +47,10 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
     public List<BlogerInfoDTO> getSubsciribeList(BlogerQuery query) throws JsonProcessingException {
 
 
-        if (query.getUseSelef () == 1) {
-            return findSelfSubcribeBloger (query);
+        if (query.getUseSelef() == 1) {
+            return findSelfSubcribeBloger(query);
         }
-        return findOtherSubcribeBloger (query);
+        return findOtherSubcribeBloger(query);
     }
 
     @Override
@@ -59,51 +59,51 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
     }
 
     public List<BlogerInfoDTO> findSelfSubcribeBloger(BlogerQuery query) throws JsonProcessingException {
-        csdnBlogerInfoMapper.executeUpdate ("DELETE FROM csdn_bloger_info");
-        List<BlogerInfoDTO> all = new ArrayList<> ();
+        csdnBlogerInfoMapper.executeUpdate("DELETE FROM csdn_bloger_info");
+        List<BlogerInfoDTO> all = new ArrayList<>();
         HttpResponse response;
         String bodyJson = "";
         for (int i = 1; i <= MAX_PAGE; i++) {
-            String url = getSubcribeUrl ();
-            url = String.format (url, i + "", getSelfId ());
-            response = HttpRequest.get (url).timeout (60000).execute (false);
+            String url = getSubcribeUrl();
+            url = String.format(url, i + "", getSelfId());
+            response = HttpRequest.get(url).timeout(60000).execute(false);
             Response<BlogerInfoDTO> responseBlog = null;
-            if (response != null && response.isOk ()) {
-                bodyJson = response.body ();
+            if (response != null && response.isOk()) {
+                bodyJson = response.body();
             }
-            if (CharSequenceUtil.isNotEmpty (bodyJson)) {
-                responseBlog = jsonMapper.readValue (bodyJson, new TypeReference<Response<BlogerInfoDTO>> () {
+            if (CharSequenceUtil.isNotEmpty(bodyJson)) {
+                responseBlog = jsonMapper.readValue(bodyJson, new TypeReference<Response<BlogerInfoDTO>>() {
                 });
             }
             if (responseBlog == null) {
                 break;
             }
-            if (CollUtil.isEmpty (responseBlog.getData ().getList ())) {
+            if (CollUtil.isEmpty(responseBlog.getData().getList())) {
                 break;
             } else {
-                all.addAll (responseBlog.getData ().getList ());
+                all.addAll(responseBlog.getData().getList());
             }
         }
-        List<CsdnBlogerInfo> entityes = new ArrayList<> ();
-        all.forEach (b -> {
-            CsdnBlogerInfo e = BeanUtil.copyProperties (b, CsdnBlogerInfo.class);
-            e.setBlogerId (IdUtil.getSnowflake (1).nextIdStr ());
-            e.setCdate (new Date ());
-            e.setIsSelf (0);
-            e.setExecSubcribeStatus (0);
-            e.setUdate (new Date ());
-            e.setId (b.getUsername ());
-            e.setSourceId (query.getSourceType ());
+        List<CsdnBlogerInfo> entityes = new ArrayList<>();
+        all.forEach(b -> {
+            CsdnBlogerInfo e = BeanUtil.copyProperties(b, CsdnBlogerInfo.class);
+            e.setBlogerId(IdUtil.getSnowflake(1).nextIdStr());
+            e.setCdate(new Date());
+            e.setIsSelf(0);
+            e.setExecSubcribeStatus(0);
+            e.setUdate(new Date());
+            e.setId(b.getUsername());
+            e.setSourceId(query.getSourceType());
 
-            entityes.add (e);
+            entityes.add(e);
 
         });
-        entityes.forEach (e -> {
-            long hasFind = csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, e.getId ()).andEq (CsdnBlogerInfo::getSourceId, e.getSourceId ()).count ();
+        entityes.forEach(e -> {
+            long hasFind = csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, e.getId()).andEq(CsdnBlogerInfo::getSourceId, e.getSourceId()).count();
             if (hasFind == 0) {
-                csdnBlogerInfoMapper.insert (e);
+                csdnBlogerInfoMapper.insert(e);
             } else {
-                log.warn ("该博客主已经抓取{},{}", e.getId (), e.getNickname ());
+                log.warn("该博客主已经抓取{},{}", e.getId(), e.getNickname());
             }
         });
         return all;
@@ -112,87 +112,87 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
 
     @Transactional(rollbackFor = Exception.class)
     public List<BlogerInfoDTO> findOtherSubcribeBloger(BlogerQuery query) throws JsonProcessingException {
-        long hasMany = csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, query.getBlogerId ()).count ();
+        long hasMany = csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, query.getBlogerId()).count();
 
-        if(hasMany==1){
-           long status= csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, query.getBlogerId ()).select (CsdnBlogerInfo::getExecSubcribeStatus).stream().findFirst ().get ().getExecSubcribeStatus ();
-           if(status==1){
-               return  Collections.emptyList ();
-           }
+        if (hasMany == 1) {
+            long status = csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, query.getBlogerId()).select(CsdnBlogerInfo::getExecSubcribeStatus).stream().findFirst().get().getExecSubcribeStatus();
+            if (status == 1) {
+                return Collections.emptyList();
+            }
         }
 
-         hasMany = csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, query.getBlogerId ()).andNotEq (CsdnBlogerInfo::getExecSubcribeStatus, 1).count ();
+        hasMany = csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, query.getBlogerId()).andNotEq(CsdnBlogerInfo::getExecSubcribeStatus, 1).count();
 
         if (hasMany > 1) {
-            csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, query.getBlogerId ()).select (CsdnBlogerInfo::getBlogerId)
-                    .stream ().skip (1).forEach (e -> csdnBlogerInfoMapper.deleteWithKey (e.getBlogerId ()));
-            return Collections.emptyList ();
+            csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, query.getBlogerId()).select(CsdnBlogerInfo::getBlogerId)
+                    .stream().skip(1).forEach(e -> csdnBlogerInfoMapper.deleteWithKey(e.getBlogerId()));
+            return Collections.emptyList();
         }
 
-        long hasExec = csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, query.getBlogerId ()).andEq (CsdnBlogerInfo::getExecSubcribeStatus, 1).count ();
+        long hasExec = csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, query.getBlogerId()).andEq(CsdnBlogerInfo::getExecSubcribeStatus, 1).count();
 
         if (hasExec > 0) {
-            csdnBlogerInfoMapper.updateExecStatusById (query.getBlogerId (), 1);
-            csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, query.getBlogerId ()).select (CsdnBlogerInfo::getBlogerId, CsdnBlogerInfo::getId).stream ().skip (1).forEach (e -> {
-                csdnBlogerInfoMapper.deleteWithKey (e.getBlogerId ());
+            csdnBlogerInfoMapper.updateExecStatusById(query.getBlogerId(), 1);
+            csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, query.getBlogerId()).select(CsdnBlogerInfo::getBlogerId, CsdnBlogerInfo::getId).stream().skip(1).forEach(e -> {
+                csdnBlogerInfoMapper.deleteWithKey(e.getBlogerId());
             });
-            return Collections.emptyList ();
+            return Collections.emptyList();
         }
-        List<BlogerInfoDTO> all = new ArrayList<> ();
+        List<BlogerInfoDTO> all = new ArrayList<>();
         HttpResponse response;
         String bodyJson = "";
         for (int i = 1; i <= MAX_PAGE; i++) {
-            String url = getSubcribeUrl ();
-            url = String.format (url, i + "", query.getBlogerId ());
-            response = HttpRequest.get (url).timeout (60000).execute (false);
+            String url = getSubcribeUrl();
+            url = String.format(url, i + "", query.getBlogerId());
+            response = HttpRequest.get(url).timeout(60000).execute(false);
             Response<BlogerInfoDTO> responseBlog = null;
-            if (response != null && response.isOk ()) {
-                bodyJson = response.body ();
+            if (response != null && response.isOk()) {
+                bodyJson = response.body();
             }
-            if (CharSequenceUtil.isNotEmpty (bodyJson)) {
-                responseBlog = jsonMapper.readValue (bodyJson, new TypeReference<Response<BlogerInfoDTO>> () {
+            if (CharSequenceUtil.isNotEmpty(bodyJson)) {
+                responseBlog = jsonMapper.readValue(bodyJson, new TypeReference<Response<BlogerInfoDTO>>() {
                 });
             }
             if (responseBlog == null) {
                 break;
             }
-            if (responseBlog.getData () == null || CollUtil.isEmpty (responseBlog.getData ().getList ())) {
+            if (responseBlog.getData() == null || CollUtil.isEmpty(responseBlog.getData().getList())) {
                 break;
             } else {
-                all.addAll (responseBlog.getData ().getList ());
+                all.addAll(responseBlog.getData().getList());
             }
         }
-        List<CsdnBlogerInfo> entityes = new ArrayList<> ();
-        all.forEach (b -> {
-            CsdnBlogerInfo e = BeanUtil.copyProperties (b, CsdnBlogerInfo.class);
-            e.setBlogerId (IdUtil.getSnowflake (1).nextIdStr ());
-            e.setCdate (new Date ());
-            e.setIsSelf (0);
-            e.setExecSubcribeStatus (0);
-            e.setUdate (new Date ());
-            e.setId (b.getUsername ());
-            e.setSourceId (query.getSourceType ());
+        List<CsdnBlogerInfo> entityes = new ArrayList<>();
+        all.forEach(b -> {
+            CsdnBlogerInfo e = BeanUtil.copyProperties(b, CsdnBlogerInfo.class);
+            e.setBlogerId(IdUtil.getSnowflake(1).nextIdStr());
+            e.setCdate(new Date());
+            e.setIsSelf(0);
+            e.setExecSubcribeStatus(0);
+            e.setUdate(new Date());
+            e.setId(b.getUsername());
+            e.setSourceId(query.getSourceType());
 
-            entityes.add (e);
+            entityes.add(e);
 
         });
-        entityes.forEach (e -> {
+        entityes.forEach(e -> {
             //long hasFind= csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId,e.getId ()).andEq (CsdnBlogerInfo::getSourceId,e.getSourceId ()).count ();
-            boolean hasFind = csdnBlogerCacheService.hashKeyWithCacheAndDb (e.getId ());
-            if (hasFind==false) {
-                csdnBlogerInfoMapper.insert (e);
+            boolean hasFind = csdnBlogerCacheService.hashKeyWithCacheAndDb(e.getId());
+            if (hasFind == false) {
+                csdnBlogerInfoMapper.insert(e);
             } else {
-                log.warn ("该博客主已经抓取{},{}", e.getId (), e.getNickname ());
+                log.warn("该博客主已经抓取{},{}", e.getId(), e.getNickname());
             }
         });
-        log.info ("总共抓取了{}条订阅者信息,博客主ID{}", entityes.size (), query.getBlogerId ());
-        CsdnBlogerInfo blogerInfo = csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, query.getBlogerId ()).single ();
+        log.info("总共抓取了{}条订阅者信息,博客主ID{}", entityes.size(), query.getBlogerId());
+        CsdnBlogerInfo blogerInfo = csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, query.getBlogerId()).single();
         if (blogerInfo != null) {
-            blogerInfo.setExecSubcribeStatus (1);
-            blogerInfo.setExeDatetime (new Date ());
-            csdnBlogerInfoMapper.updateById (blogerInfo);
-            if (CharSequenceUtil.isNotEmpty (query.getBlogerId ())) {
-                csdnBlogerInfoMapper.updateExecStatusById (query.getBlogerId (), 1);
+            blogerInfo.setExecSubcribeStatus(1);
+            blogerInfo.setExeDatetime(new Date());
+            csdnBlogerInfoMapper.updateById(blogerInfo);
+            if (CharSequenceUtil.isNotEmpty(query.getBlogerId())) {
+                csdnBlogerInfoMapper.updateExecStatusById(query.getBlogerId(), 1);
             }
         }
         return all;
@@ -200,10 +200,10 @@ public class CsdnBlogerFinderServiceImpl implements BlogerFinderService<BlogerIn
 
 
     private String getSelfId() {
-        return csdnBlogerInfoProp.getSelfid ();
+        return csdnBlogerInfoProp.getSelfid();
     }
 
     private String getSubcribeUrl() {
-        return csdnBlogerInfoProp.getTopic ().stream ().filter (t -> "subcribe".equals (t.getTopicname ().toLowerCase (Locale.ROOT))).map (CsdnRouterTopic::getUrl).findAny ().get ();
+        return csdnBlogerInfoProp.getTopic().stream().filter(t -> "subcribe".equals(t.getTopicname().toLowerCase(Locale.ROOT))).map(CsdnRouterTopic::getUrl).findAny().get();
     }
 }

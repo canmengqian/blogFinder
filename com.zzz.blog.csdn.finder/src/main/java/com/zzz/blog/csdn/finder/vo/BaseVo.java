@@ -79,7 +79,7 @@ public class BaseVo {
      * @Return int
      **/
     public static int defaultPage(int page) {
-        return Math.max (page, DEFAULT_PAGE);
+        return Math.max(page, DEFAULT_PAGE);
     }
 
     /*
@@ -90,15 +90,15 @@ public class BaseVo {
      * @Return int
      **/
     public static int defaultLimit(int limit) {
-        return Math.max (limit, DEFAULT_LIMIT);
+        return Math.max(limit, DEFAULT_LIMIT);
     }
 
     public static int defaultLimit(int limit, int multiple) {
-        return Math.max (limit, multiple * DEFAULT_LIMIT);
+        return Math.max(limit, multiple * DEFAULT_LIMIT);
     }
 
     public static String defaultStartDate(String startDate) {
-        if (CharSequenceUtil.isNotEmpty (startDate)) {
+        if (CharSequenceUtil.isNotEmpty(startDate)) {
             return startDate;
         }
         return START_DATE;
@@ -106,7 +106,7 @@ public class BaseVo {
     }
 
     public static String defaultEndDate(String endDate) {
-        if (CharSequenceUtil.isNotEmpty (endDate)) {
+        if (CharSequenceUtil.isNotEmpty(endDate)) {
             return endDate;
         }
         return END_DATE;
@@ -122,7 +122,7 @@ public class BaseVo {
      **/
     public void amendPage() {
         if (page <= 0) {
-            this.page = defaultPage (1);
+            this.page = defaultPage(1);
         }
     }
 
@@ -135,18 +135,18 @@ public class BaseVo {
      **/
     public void amendLimit() {
         if (limit <= 0) {
-            this.limit = defaultLimit (10);
+            this.limit = defaultLimit(10);
         }
     }
 
     public void amendstartDate() {
-        if (CharSequenceUtil.isEmpty (startDate)) {
+        if (CharSequenceUtil.isEmpty(startDate)) {
             this.startDate = START_DATE;
         }
     }
 
     public void amendendDate() {
-        if (CharSequenceUtil.isEmpty (endDate)) {
+        if (CharSequenceUtil.isEmpty(endDate)) {
             this.endDate = END_DATE;
         }
     }
@@ -160,13 +160,13 @@ public class BaseVo {
      * @date 14:26 2022/2/16
      **/
     public void amendPageAndLimit() {
-        amendPage ();
-        amendLimit ();
+        amendPage();
+        amendLimit();
     }
 
     public void amendStartAndEndDate() {
-        amendstartDate ();
-        amendendDate ();
+        amendstartDate();
+        amendendDate();
     }
 
 

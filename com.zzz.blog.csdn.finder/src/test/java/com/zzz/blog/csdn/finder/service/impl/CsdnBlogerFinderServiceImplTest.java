@@ -25,11 +25,11 @@ class CsdnBlogerFinderServiceImplTest {
 
     @Test
     void getSubsciribeList() throws JsonProcessingException {
-        CsdnBlogerFinderServiceImpl  service = new CsdnBlogerFinderServiceImpl ();
+        CsdnBlogerFinderServiceImpl service = new CsdnBlogerFinderServiceImpl();
     }
 
     @Test
     void getotherSubsciribeList() throws JsonProcessingException {
-        csdnBlogerFinderService.getSubsciribeList (BlogerQuery.builder ().useSelef (0).blogerId ("weixin_43920582").build ());
+        csdnBlogerFinderService.getSubsciribeList(BlogerQuery.builder().useSelef(0).blogerId("weixin_43920582").build());
     }
 }

@@ -6,6 +6,7 @@ import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 /**
  *
  */
@@ -13,6 +14,7 @@ import java.util.List;
 public interface BlogerFinderService<T, M> {
     /**
      * 获取订阅者信息
+     *
      * @param blogerId
      * @return
      */

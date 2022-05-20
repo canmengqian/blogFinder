@@ -2,75 +2,21 @@ spring:
   cloud:
     gateway:
       enabled: true
-      httpclient:
-        max-header-size: 1000
-        max-initial-line-length:
-        pool:
-          max-connections: 20
-          acquire-timeout: 60000
-          eviction-interval:
-          max-idle-time: 1000
-          max-life-time: 1000
-          metrics: false
-          name: gwpool
-          type: elastic
-      x-forwarded:
-        host-enabled: true
-        proto-enabled: true
-        proto-append: true
-        prefix-enabled: true
-        prefix-append: true
-        port-enabled: true
-        port-append: true
-        order: 0
-        host-append: true
-        for-enabled: true
-        for-append: true
-        enabled: true
-      filter:
-        secure-headers:
-          xss-protection-header: 1000
-        retry:
-          enabled: true
-      discovery:
-        locator:
-          lower-case-service-id: true
-          enabled: true
+      routes:
+        - id: email
+          uri: lb://EMAIL-SERVICE
           predicates:
-          filters:
-          include-expression: true
-      redis-rate-limiter:
-        burst-capacity-header: X-RateLimit-Burst-Capacity
-        include-headers: true
-        config:
+            - Path= /email/**
+        - id: gw
+          uri: lb://gateway
+          predicates:
+            - Path= /gw/**
+        - id: net
+          uri: lb://net
+          predicates:
+            - Path= /net/{segment}
     consul:
+      host: localhost
       port: 8500
       discovery:
-        order: 0
-        catalog-services-watch-delay: 1000
-        catalog-services-watch-timeout: 1000
-        register: true
-        heartbeat:
-          reregister-service-on-failure: false
-          enabled: true
-          ttl: 30s
-        register-health-check: false
-        deregister: true
-        consistency-mode: consistent
-        default-query-tag: gw
-        enable-tag-override: true
-        enabled: true
-        fail-fast: true
-        hostname: localhost
-        tags: gw,gateway
         service-name: gateway
-        scheme: http
-        query-passing: false
-        lifecycle:
-          enabled: true
-        health-check-interval: 10s
-        health-check-timeout: 30s
-        health-check-critical-timeout: 60s
-      host: 192.168.203.133
-
-

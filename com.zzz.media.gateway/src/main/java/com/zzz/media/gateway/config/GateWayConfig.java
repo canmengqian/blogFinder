@@ -21,7 +21,7 @@ public class GateWayConfig {
                 .route("path_route", r -> r.path("/csdn")
                         .uri("https://blog.csdn.net"))
                 .route("baidu", r ->
-                    r.path("/baidu").uri("http://www.51cto.com") )
+                        r.path("/baidu").uri("http://www.51cto.com"))
                 .build();
     }
 }

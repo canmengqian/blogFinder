@@ -1,5 +1,5 @@
 package com.zzz.blog.csdn.finder.service;
 
-public interface BaseService <M>{
+public interface BaseService<M> {
     M getMapper();
 }

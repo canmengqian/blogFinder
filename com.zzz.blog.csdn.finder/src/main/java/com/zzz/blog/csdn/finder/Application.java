@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableConfigurationProperties({CsdnBlogerInfoProp.class})
 @EnableScheduling
 @EnableAsync
-@EnableTransactionManagement(proxyTargetClass=true)
+@EnableTransactionManagement(proxyTargetClass = true)
 public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run (Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

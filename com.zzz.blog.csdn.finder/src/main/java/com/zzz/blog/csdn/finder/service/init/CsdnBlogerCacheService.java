@@ -21,23 +21,23 @@ public class CsdnBlogerCacheService {
     @Resource
     CsdnBlogerInfoMapper csdnBlogerInfoMapper;
 
-   // @PostConstruct
+    // @PostConstruct
     public void initBlogerInfo() {
-        log.info ("初始化csdn  bloger 信息,正在加载至redis中");
-        StopWatch stopWatch = new StopWatch ();
-        stopWatch.start ();
-        csdnBlogerInfoMapper.createLambdaQuery ().select (CsdnBlogerInfo::getId).stream().map (CsdnBlogerInfo::getId).forEach (e-> redisTemplate.opsForValue ().set (e,e));
-        stopWatch.stop ();
-        log.info ("加载完毕，耗时{}毫秒", stopWatch.getTotalTimeMillis ());
+        log.info("初始化csdn  bloger 信息,正在加载至redis中");
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        csdnBlogerInfoMapper.createLambdaQuery().select(CsdnBlogerInfo::getId).stream().map(CsdnBlogerInfo::getId).forEach(e -> redisTemplate.opsForValue().set(e, e));
+        stopWatch.stop();
+        log.info("加载完毕，耗时{}毫秒", stopWatch.getTotalTimeMillis());
     }
 
 
     public boolean hashKeyWithCacheAndDb(String key) {
-        boolean haskey = redisTemplate.hasKey (key);
+        boolean haskey = redisTemplate.hasKey(key);
         if (!haskey) {
-            CsdnBlogerInfo info = csdnBlogerInfoMapper.createLambdaQuery ().andEq (CsdnBlogerInfo::getId, key).single ();
-            if (ObjectUtil.isNotNull (info)) {
-                redisTemplate.opsForValue ().set (info.getId (), info.getId ());
+            CsdnBlogerInfo info = csdnBlogerInfoMapper.createLambdaQuery().andEq(CsdnBlogerInfo::getId, key).single();
+            if (ObjectUtil.isNotNull(info)) {
+                redisTemplate.opsForValue().set(info.getId(), info.getId());
                 return true;
             }
         }

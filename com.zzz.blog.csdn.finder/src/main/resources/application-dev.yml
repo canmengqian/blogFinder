@@ -1,4 +1,3 @@
-
 beetlsql:
   sqlManagers: sqlManager1
   sqlManager1:

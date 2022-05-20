@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/eureaka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/service1/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.blog.csdn.finder/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.base.adminserver/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.base.adminserver/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.email.interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.email/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.netcollect/src/main/java" charset="UTF-8" />
   </component>
 </project>

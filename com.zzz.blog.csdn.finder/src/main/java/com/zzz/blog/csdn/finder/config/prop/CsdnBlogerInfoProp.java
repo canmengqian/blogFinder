@@ -19,7 +19,7 @@ import java.util.List;
 @Accessors(chain = true)
 @Builder
 public class CsdnBlogerInfoProp {
-    String selfid ;
+    String selfid;
 
     List<CsdnRouterTopic> topic;
 }

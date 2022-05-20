@@ -12,8 +12,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Builder
 public class CsdnRouterTopic {
-    String method ;
-    String dataType ;
+    String method;
+    String dataType;
     String url;
     String topicname;
 }

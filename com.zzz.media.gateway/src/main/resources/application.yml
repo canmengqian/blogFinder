@@ -1,18 +1,13 @@
 spring:
-  cloud:
-    gateway:
-      enabled: true
-    consul:
-      port: 8500
-      host: 192.168.203.133
-      discovery:
-        health-check-path: /actuator/health
-        service-name: gateway
-        instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
-        prefer-ip-address: true
   application:
     name: gw
   profiles:
     active: dev
 server:
   port: 18087
+  max-http-header-size: 102400
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

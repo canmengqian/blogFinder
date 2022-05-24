@@ -5,12 +5,19 @@
     <file url="file://$PROJECT_DIR$/app/gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/service1/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.blog.csdn.finder/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.idgen-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.apidoc/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.base.adminserver/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.base.adminserver/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.base/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.book/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.collector.interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.email.interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.email/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.idgen/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.zzz.media.netcollect/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.zzz.media.util/src/main/java" charset="UTF-8" />
   </component>
 </project>

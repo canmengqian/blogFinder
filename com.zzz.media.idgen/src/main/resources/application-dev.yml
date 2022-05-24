@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    consul:
+      port: 8500
+      discovery:
+        service-name: idgen
+      host: localhost

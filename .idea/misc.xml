@@ -3,7 +3,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/com.zzz.blog.csdn.finder/pom.xml" />
         <option value="$PROJECT_DIR$/com.zzz.media.base.adminserver/pom.xml" />
         <option value="$PROJECT_DIR$/com.zzz.media.gateway/pom.xml" />
         <option value="$PROJECT_DIR$/com.zzz.media.email/pom.xml" />
@@ -15,6 +14,13 @@
         <option value="$PROJECT_DIR$/app/pom.xml" />
         <option value="$PROJECT_DIR$/demo/pom.xml" />
         <option value="$PROJECT_DIR$/com.zzz.media.base/pom.xml" />
+        <option value="$PROJECT_DIR$/com.zzz.blog.csdn.finder/pom.xml" />
+        <option value="$PROJECT_DIR$/com.zzz.media.idgen/pom.xml" />
+        <option value="$PROJECT_DIR$/com.zzz.idgen-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/com.zzz.media.util/pom.xml" />
+        <option value="$PROJECT_DIR$/com.zzz.media.book/pom.xml" />
+        <option value="$PROJECT_DIR$/com.zzz.media.collector.interface/pom.xml" />
+        <option value="$PROJECT_DIR$/com.zzz.media.apidoc/pom.xml" />
       </list>
     </option>
   </component>

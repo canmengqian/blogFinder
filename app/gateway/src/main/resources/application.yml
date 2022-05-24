@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: gw
+  cloud:
+    gateway:
+      routes:
+        - id: s1
+          uri: lb://s1
+          predicates:
+            - Path= /s1/**
+server:
+  port: 8765
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

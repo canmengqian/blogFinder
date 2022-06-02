@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    consul:
+      port: 8500
+      discovery:
+        order: 0
+        register: true
+        heartbeat:
+          reregister-service-on-failure: false
+          enabled: true
+          ttl: 30s
+        register-health-check: false
+        deregister: true
+        consistency-mode: consistent
+        default-query-tag: email-service
+        enable-tag-override: true
+        enabled: true
+        fail-fast: true
+        tags: email-service
+        service-name: email-service
+        scheme: http
+        query-passing: true
+        lifecycle:
+          enabled: true
+        health-check-interval: 10s
+        health-check-timeout: 30s
+        health-check-critical-timeout: 60s
+        prefer-ip-address: true
+      host: 192.168.1.238
+    loadbalancer:
+      enabled: true
+      retry:
+        enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER

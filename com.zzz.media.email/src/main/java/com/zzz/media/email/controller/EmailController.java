@@ -1,5 +1,6 @@
 package com.zzz.media.email.controller;
 
+import com.zzz.media.common.web.BizException;
 import com.zzz.media.email.service.MailSendServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class EmailController {
     MailSendServiceImpl mailSendService;
 
     @RequestMapping("/ok")
-    public String index() {
-        return mailSendService.send();
+    public String index() throws BizException {
+        return mailSendService.sendTxt(null);
     }
 }

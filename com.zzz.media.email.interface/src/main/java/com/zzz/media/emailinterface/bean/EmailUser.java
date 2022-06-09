@@ -18,5 +18,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EmailUser {
     String userId;
+    /**
+     * 邮箱账号
+     */
     String account;
 }

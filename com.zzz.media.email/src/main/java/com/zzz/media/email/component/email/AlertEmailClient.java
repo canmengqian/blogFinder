@@ -1,6 +1,7 @@
 package com.zzz.media.email.component.email;
 
 import com.zzz.media.email.component.email.subject.TraceSubjectJoiner;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.util.Arrays;
@@ -10,9 +11,10 @@ import java.util.List;
  * @author zhengzz
  * @version 1.0.0
  * @className AlertEmailClient
- * @description TODO
+ * @description
  * @date 2022/6/2
  */
+@Service("AlertEmailClient")
 public class AlertEmailClient implements SimpleEmailClient {
 
     private TraceLevel level;
@@ -21,6 +23,21 @@ public class AlertEmailClient implements SimpleEmailClient {
 
     private static final TraceSubjectJoiner JOINER = new TraceSubjectJoiner();
 
+    public TraceLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(TraceLevel level) {
+        this.level = level;
+    }
+
+    public SimpleEmailClient getDelegatorClient() {
+        return delegatorClient;
+    }
+
+    public void setDelegatorClient(SimpleEmailClient delegatorClient) {
+        this.delegatorClient = delegatorClient;
+    }
 
     @Override
     public void sendTextContent(String from, String to, String subject, String content) throws MessagingException {

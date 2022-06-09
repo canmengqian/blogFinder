@@ -1,0 +1,35 @@
+feign:
+  autoconfiguration:
+    jackson:
+      enabled: true
+  httpclient:
+    connection-timeout: 30000 #连接超时
+    connection-timer-repeat: 3000
+    disable-ssl-validation: true #禁用 SSL 验证
+    enabled: true
+    follow-redirects: true #允许跟随重定向
+    max-connections-per-route: 200 #每个路由允许最大的连接数
+    hc5:
+      enabled: true #允许hc5版本
+    max-connections: 200 #最大连接数
+    time-to-live: 9000
+  okhttp:
+    enabled: false # 启用Feign使用OK HTTP Client。
+  client:
+    refresh-enabled: true
+    decode-slash: false
+    default-to-properties: true
+  metrics:
+    enabled: true #开启度量
+  circuitbreaker:
+    enabled: true
+    group:
+      enabled: false
+  compression:
+    request:
+      enabled: true # 允许压缩请求
+      mime-types: text/xml, application/xml, application/json #压缩媒体类型
+      min-request-size: 100
+    response:
+      enabled: true #压缩响应
+      useGzipDecoder: true #使用Gzip解码器

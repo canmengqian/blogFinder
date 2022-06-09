@@ -12,6 +12,9 @@ spring:
     password: vtmjlxihqxskeada
     default-encoding: UTF-8
     protocol: smtps
+  config:
+    import:
+      - classpath:/application-feign.yml
 
 server:
   port: 18096

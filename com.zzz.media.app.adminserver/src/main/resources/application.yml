@@ -1,0 +1,10 @@
+server:
+  port: 18081
+spring:
+  application:
+    name: admin
+  devtools:
+    livereload:
+      enabled: false
+  profiles:
+    active: dev238

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,9 +19,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EmailTxtSendBean {
+public class EmailSendBean {
     String title;
     String content;
+    List<MultipartFile> files;
     List<EmailUser> reciver;
     EmailUser sender;
+    ClientType clientType;
 }

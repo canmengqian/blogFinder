@@ -1,0 +1,126 @@
+spring:
+  cloud:
+    consul:
+      port: 8500
+      discovery:
+        order: 0
+        register: true
+        heartbeat:
+          reregister-service-on-failure: false
+          enabled: true
+          ttl: 30s
+        register-health-check: false
+        deregister: true
+        consistency-mode: consistent
+        default-query-tag: admin-service
+        enable-tag-override: true
+        enabled: true
+        fail-fast: true
+        tags: admin-service
+        service-name: admin-service
+        scheme: http
+        query-passing: true
+        lifecycle:
+          enabled: true
+        health-check-interval: 10s
+        health-check-timeout: 30s
+        health-check-critical-timeout: 60s
+        prefer-ip-address: true
+      host: 192.168.1.238
+    loadbalancer:
+      enabled: true
+      retry:
+        enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  boot:
+    admin:
+      discovery:
+        enabled: true
+        #converter:
+          #health-endpoint-path:
+        #ignored-instances-metadata:
+        #services:
+        #instances-metadata:
+      context-path: /admin
+      ui:
+        cache-templates: true
+        cache:
+          max-age: 3600s # 缓存最大时间
+          no-cache: false # 不使用缓存
+          no-store: false
+        poll-timer:
+          cache: 2500
+          datasource: 2500
+          gc: 2500
+          memory: 2500
+          process: 2500
+          threads: 2500
+        remember-me-enabled: true
+        title: Admin
+      instance-auth:
+        default-password: admin
+        enabled: true
+        default-user-name: admin
+      monitor:
+        default-retries: 3
+        default-timeout: 30000ms
+        info-interval: 1m
+        info-lifetime: 1m
+        status-interval: 10000ms
+        status-lifetime: 10000ms
+      server:
+        enabled: true
+      probed-endpoints: health, env, metrics, httptrace:trace, httptrace, threaddump:dump,threaddump, jolokia, info, logfile, refresh, flyway, liquibase, heapdump, loggers,auditevents, mappings, scheduledtasks, configprops, caches, beans
+management:
+  # 审计事件
+  auditevents:
+    enabled: true
+  # 云铸造
+  cloudfoundry:
+    enabled: true
+  endpoint:
+    auditevents:
+      cache:
+        time-to-live: 10000ms
+      enabled: true
+    beans:
+      cache:
+        time-to-live: 0ms
+      enabled: true
+    caches:
+      cache:
+        time-to-live: 0ms
+      enabled: true
+    conditions:
+      cache:
+        time-to-live: 0ms
+      enabled: true
+    health:
+      cache:
+        time-to-live: 10000ms
+      enabled: true
+      show-details: always
+      status:
+        order: DOWN, OUT_OF_SERVICE, UP, UNKNOWN #按严重程度排列的以逗号分隔的健康状态列表
+  metrics:
+    data:
+      repository:
+        autotime:
+          enabled: true
+  endpoints:
+    enabled-by-default: true
+    # Web 端点的基本路径。当管理服务器共享主服务器端口时，相对于 servlet 上下文路径 (server.servlet.context-path) 或 WebFlux 基本路径 (spring.webflux.base-path)。当配置了单独的管理服务器端口 (management.server.port) 时，相对于管理服务器基本路径 (management.server.base-path)。
+    web:
+      base-path: /actuator
+      cors:
+        allowed-headers: '*' #允许所有头部信息
+        allowed-methods: '*' #允许所有方法
+        max-age: 1800s
+      discovery:
+        enabled: true
+      exposure:
+        include: '*'
+
+
